@@ -10,7 +10,6 @@ public class CategoryDaoTest {
 	public static void main(String[] args) {
 		insertTest();
 		readTest();
-		updateTest();
 	}
 	
 	private static void insertTest() {
@@ -30,11 +29,13 @@ public class CategoryDaoTest {
 	}
 	
 	private static void readTest() {
+		
 		CategoryDao dao = new CategoryDao();
 		ArrayList list = dao.getList();
-		for(CategoryVo vo : list) {
-			System.out.println(vo);
+		for(int i=0;i<list.size();i++) {
+			System.out.print(list.get(i)+ ", ");
 		}
+		System.out.println();
 	}
 	
 	private static void updateTest() {

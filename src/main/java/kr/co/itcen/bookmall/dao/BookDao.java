@@ -12,7 +12,6 @@ import kr.co.itcen.bookmall.vo.BookVo;
 
 public class BookDao {
 
-
 	private Connection getConnection() throws SQLException {
 		Connection connection = null;
 		
@@ -66,36 +65,34 @@ public class BookDao {
 		return result;
 	}
 
-	public List<BookVo> getList() {
-		List<BookVo> result = new ArrayList<BookVo>();
+	public ArrayList getList() {
+		ArrayList result = new ArrayList();
 		
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		try {
 			connection = getConnection();
 			
-			String sql = "select * from book order by no asc";
+			String sql = "select book.title, category.name ,book.price from book, category where book.category_no=category.no order by book.no asc";
 			pstmt = connection.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				Long no = rs.getLong(1);
+				String title = rs.getString(1);
 				String name = rs.getString(2);
 				int price = rs.getInt(3);
-				Long category_no = rs.getLong(4);
 				
-				BookVo vo= new BookVo();
 				
-				vo.setNo(no);
-				vo.setTitle(name);
-				vo.setPrice(price);
-				vo.setCategory_no(category_no);
+				ArrayList temp = new ArrayList();
+				temp.add(title);
+				temp.add(name);
+				temp.add(price);
 				
-				result.add(vo);
+				result.add(temp);
 			}
+
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {

@@ -66,8 +66,8 @@ public class OrderDao {
 		return result;
 	}
 
-	public List<OrderVo> getList() {
-		List<OrderVo> result = new ArrayList<OrderVo>();
+	public ArrayList getList() {
+		ArrayList result = new ArrayList();
 		
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -76,26 +76,28 @@ public class OrderDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "select * from bookmall.order order by no asc";
+			String sql = "select bookmall.order.no, user.name, user.email, bookmall.order.total_price, bookmall.order.deli_address"
+					+ " from bookmall.order, user where bookmall.order.user_no=user.no order by no asc";
 			pstmt = connection.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				Long no = rs.getLong(1);
-				int total_price = rs.getInt(2);
-				String deli_address = rs.getString(3);
-				Long user_no =rs.getLong(4);
-				Long deli_no =rs.getLong(5);
+				String name = rs.getString(2);
+				String email = rs.getString(3);
+				int price = rs.getInt(4);
+				String deli_address = rs.getString(5);
 				
-				OrderVo vo= new OrderVo();
-				vo.setNo(no);
-				vo.settotal_Price(total_price);
-				vo.setDeli_address(deli_address);
-				vo.setUser_no(user_no);
-				vo.setDeli_no(deli_no);
+				ArrayList temp = new ArrayList();
 				
-				result.add(vo);
+				temp.add(no);
+				temp.add(name);
+				temp.add(email);
+				temp.add(price);
+				temp.add(deli_address);
+				
+				result.add(temp);
 			}
 		} catch (SQLException e) {
 			System.out.println("error:" + e);

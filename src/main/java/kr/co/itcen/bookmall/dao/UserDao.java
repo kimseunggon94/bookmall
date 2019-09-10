@@ -68,9 +68,8 @@ public class UserDao {
 		return result;
 	}
 
-	public List<UserVo> getList() {
-		List<UserVo> result = new ArrayList<UserVo>();
-		
+	public ArrayList getList() {
+		ArrayList result = new ArrayList();
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -78,30 +77,25 @@ public class UserDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "select * from user order by no asc";
+			String sql = "select name, phone, email, password, address from user order by no asc";
 			pstmt = connection.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				Long no = rs.getLong(1);
-				String name = rs.getString(2);
-				String phone =  rs.getString(3);
-				String email =  rs.getString(4);
-				String password =  rs.getString(5);
-				String address =  rs.getString(6);
+				String name = rs.getString(1);
+				String phone =  rs.getString(2);
+				String email =  rs.getString(3);
+				String password =  rs.getString(4);
+				String address =  rs.getString(5);
 				
-				
-				
-				UserVo vo= new UserVo();
-				vo.setNo(no);
-				vo.setName(name);
-				vo.setPhone(phone);
-				vo.setEmail(email);
-				vo.setPassword(password);
-				vo.setAddress(address);
-				
-				result.add(vo);
+				ArrayList temp = new ArrayList();
+				temp.add(name);
+				temp.add(phone);
+				temp.add(email);
+				temp.add(password);
+				temp.add(address);			
+				result.add(temp);
 			}
 		} catch (SQLException e) {
 			System.out.println("error:" + e);

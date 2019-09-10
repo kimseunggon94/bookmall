@@ -1,7 +1,9 @@
 package kr.co.itcen.bookmall.dao.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import kr.co.itcen.bookmall.dao.BookDao;
 import kr.co.itcen.bookmall.dao.UserDao;
 import kr.co.itcen.bookmall.vo.UserVo;
 
@@ -9,7 +11,6 @@ public class UserDaoTest {
 	public static void main(String[] args) {
 		insertTest();
 		readTest();
-		updateTest();
 	}
 	
 	private static void insertTest() {
@@ -34,9 +35,9 @@ public class UserDaoTest {
 	
 	private static void readTest() {
 		UserDao dao = new UserDao();
-		List<UserVo> list = dao.getList();
-		for(UserVo vo : list) {
-			System.out.println(vo);
+		ArrayList list = dao.getList();
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
 		}
 	}
 	

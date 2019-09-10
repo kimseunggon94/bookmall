@@ -64,7 +64,7 @@ public class CategoryDao {
 		return result;
 	}
 
-	public List<CategoryVo> getList() {
+	public ArrayList getList() {
 		ArrayList result = new ArrayList();
 		
 		Connection connection = null;
@@ -83,6 +83,7 @@ public class CategoryDao {
 				String name = rs.getString(1);
 				result.add(name);
 			}
+			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {

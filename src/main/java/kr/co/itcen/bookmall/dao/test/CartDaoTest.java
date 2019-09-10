@@ -1,5 +1,6 @@
 package kr.co.itcen.bookmall.dao.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.itcen.bookmall.dao.CartDao;
@@ -9,7 +10,6 @@ public class CartDaoTest {
 	public static void main(String[] args) {
 		insertTest();
 		readTest();
-		updateTest();
 	}
 	
 	private static void insertTest() {
@@ -31,9 +31,9 @@ public class CartDaoTest {
 	
 	private static void readTest() {
 		CartDao dao = new CartDao();
-		List<CartVo> list = dao.getList();
-		for(CartVo vo : list) {
-			System.out.println(vo);
+		ArrayList list = dao.getList();
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
 		}
 	}
 	

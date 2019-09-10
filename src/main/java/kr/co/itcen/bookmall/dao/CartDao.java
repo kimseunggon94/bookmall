@@ -65,8 +65,8 @@ public class CartDao {
 		return result;
 	}
 
-	public List<CartVo> getList() {
-		List<CartVo> result = new ArrayList<CartVo>();
+	public ArrayList getList() {
+		 ArrayList result = new ArrayList();
 		
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -75,24 +75,27 @@ public class CartDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "select * from cart order by no asc";
+			String sql = "select user.name, book.title, cart.amount, cart.amount*book.price from cart, book, user "
+					+ "where cart.book_no= book.no and cart.user_no=user.no "
+					+ "order by cart.no asc";
 			pstmt = connection.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				Long no = rs.getLong(1);
-				int amount = rs.getInt(2);
-				Long book_no = rs.getLong(3);
-				Long user_no = rs.getLong(4);
+				String user_name = rs.getString(1);
+				String book_name = rs.getString(2);
+				int amount = rs.getInt(3);
+				int price = rs.getInt(4);
 				
-				CartVo vo= new CartVo();
-				vo.setNo(no);
-				vo.setAmount(amount);
-				vo.setBook_no(book_no);
-				vo.setUser_no(user_no);
+				ArrayList temp= new ArrayList();
 				
-				result.add(vo);
+				temp.add(user_name);
+				temp.add(book_name);
+				temp.add(amount);
+				temp.add(price);
+				
+				result.add(temp);
 			}
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
