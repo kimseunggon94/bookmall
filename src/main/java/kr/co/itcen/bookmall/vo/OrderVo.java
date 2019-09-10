@@ -2,7 +2,7 @@ package kr.co.itcen.bookmall.vo;
 
 public class OrderVo {
 	private Long no;
-	private Long total_price;
+	private int total_price;
 	private String deli_address;
 	private Long user_no;
 	private Long deli_no;
@@ -12,10 +12,10 @@ public class OrderVo {
 	public void setNo(Long no) {
 		this.no = no;
 	}
-	public Long gettotal_Price() {
+	public int gettotal_Price() {
 		return total_price;
 	}
-	public void settotal_Price(Long total_price) {
+	public void settotal_Price(int total_price) {
 		this.total_price = total_price;
 	}
 	public String getDeli_address() {

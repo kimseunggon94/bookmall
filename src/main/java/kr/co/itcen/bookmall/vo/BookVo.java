@@ -3,7 +3,7 @@ package kr.co.itcen.bookmall.vo;
 public class BookVo {
 	private Long no;
 	private String title;
-	private Long price;
+	private int price;
 	private Long category_no;
 	private Long discount_no;
 	public Long getNo() {
@@ -18,10 +18,10 @@ public class BookVo {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Long getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(Long price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public Long getCategory_no() {

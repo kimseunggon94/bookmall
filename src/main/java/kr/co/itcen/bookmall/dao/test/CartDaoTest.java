@@ -16,13 +16,13 @@ public class CartDaoTest {
 		CartDao dao = new CartDao();
 		
 		CartVo vo1 = new CartVo();
-		vo1.setAmount((long) 10);
+		vo1.setAmount( 10);
 		vo1.setBook_no((long)1);
 		vo1.setUser_no((long)2);
 		dao.insert(vo1);
 		
 		CartVo vo2 = new CartVo();
-		vo2.setAmount((long) 20);
+		vo2.setAmount( 20);
 		vo2.setBook_no((long)2);
 		vo2.setUser_no((long)1);
 		dao.insert(vo2);
@@ -39,7 +39,7 @@ public class CartDaoTest {
 	
 	private static void updateTest() {
 		CartDao dao = new CartDao();
-		dao.update((long) 1, (long)13131);
+		dao.update((long) 1, 13131);
 	}
 
 	private static void deleteAllTest() {

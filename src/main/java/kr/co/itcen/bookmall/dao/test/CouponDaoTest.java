@@ -10,7 +10,6 @@ public class CouponDaoTest {
 		insertTest();
 		readTest();
 		updateTest();
-		deleteAllTest();
 	}
 	
 	private static void insertTest() {

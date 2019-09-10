@@ -1,5 +1,6 @@
 package kr.co.itcen.bookmall.dao.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.itcen.bookmall.dao.CategoryDao;
@@ -30,7 +31,7 @@ public class CategoryDaoTest {
 	
 	private static void readTest() {
 		CategoryDao dao = new CategoryDao();
-		List<CategoryVo> list = dao.getList();
+		ArrayList list = dao.getList();
 		for(CategoryVo vo : list) {
 			System.out.println(vo);
 		}

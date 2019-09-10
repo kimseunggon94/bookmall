@@ -2,7 +2,7 @@ package kr.co.itcen.bookmall.vo;
 
 public class CartVo {
 	private Long no;
-	private Long amount;
+	private int amount;
 	private Long book_no;
 	private Long user_no;
 	public Long getNo() {
@@ -11,10 +11,10 @@ public class CartVo {
 	public void setNo(Long no) {
 		this.no = no;
 	}
-	public Long getAmount() {
+	public int getAmount() {
 		return amount;
 	}
-	public void setAmount(Long amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	public Long getBook_no() {

@@ -38,7 +38,7 @@ public class CartDao {
 			
 			String sql = "insert into cart values(null, ?, ?, ?)";
 			pstmt = connection.prepareStatement(sql);
-			pstmt.setLong(1, vo1.getAmount());
+			pstmt.setInt(1, vo1.getAmount());
 			pstmt.setLong(2, vo1.getBook_no());
 			pstmt.setLong(3, vo1.getUser_no());
 			
@@ -82,7 +82,7 @@ public class CartDao {
 			
 			while(rs.next()){
 				Long no = rs.getLong(1);
-				Long amount = rs.getLong(2);
+				int amount = rs.getInt(2);
 				Long book_no = rs.getLong(3);
 				Long user_no = rs.getLong(4);
 				
@@ -115,7 +115,7 @@ public class CartDao {
 		return result;
 	}
 	
-	public boolean update(Long no, Long amount) {
+	public boolean update(Long no, int amount) {
 		boolean result = false;
 		Connection connection = null;
 		PreparedStatement pstmt = null;

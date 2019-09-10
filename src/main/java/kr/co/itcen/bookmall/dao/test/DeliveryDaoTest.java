@@ -10,7 +10,6 @@ public class DeliveryDaoTest {
 		insertTest();
 		readTest();
 		updateTest();
-		deleteAllTest();
 	}
 	
 	private static void insertTest() {

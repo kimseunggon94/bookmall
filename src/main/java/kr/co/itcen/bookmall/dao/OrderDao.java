@@ -36,9 +36,12 @@ public class OrderDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "insert into order values(null, ?)";
+			String sql = "insert into bookmall.order values(null, ?, ?, ?, null)";
 			pstmt = connection.prepareStatement(sql);
-			pstmt.setLong(1, vo1.gettotal_Price());
+			pstmt.setInt(1, vo1.gettotal_Price());
+			pstmt.setString(2, vo1.getDeli_address());
+			pstmt.setLong(3, vo1.getUser_no());
+			
 			
 			int count = pstmt.executeUpdate();
 			result = (count == 1);
@@ -73,18 +76,24 @@ public class OrderDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "select no, name from order order by no asc";
+			String sql = "select * from bookmall.order order by no asc";
 			pstmt = connection.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				Long no = rs.getLong(1);
-				Long price = rs.getLong(2);
+				int total_price = rs.getInt(2);
+				String deli_address = rs.getString(3);
+				Long user_no =rs.getLong(4);
+				Long deli_no =rs.getLong(5);
 				
 				OrderVo vo= new OrderVo();
 				vo.setNo(no);
-				vo.setPrice(price);
+				vo.settotal_Price(total_price);
+				vo.setDeli_address(deli_address);
+				vo.setUser_no(user_no);
+				vo.setDeli_no(deli_no);
 				
 				result.add(vo);
 			}
@@ -109,7 +118,7 @@ public class OrderDao {
 		return result;
 	}
 	
-	public boolean update(Long no, String name) {
+	public boolean update(Long no, String deli_address) {
 		boolean result = false;
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -117,10 +126,10 @@ public class OrderDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "update order set name = ? where no = ?";
+			String sql = "update bookmall.order set deli_address = ? where no = ?";
 			pstmt = connection.prepareStatement(sql);
 			
-			pstmt.setString(1, name);									
+			pstmt.setString(1, deli_address);									
 			pstmt.setLong(2, no);
 			
 			int count = pstmt.executeUpdate();
@@ -151,7 +160,7 @@ public class OrderDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "delete from order";
+			String sql = "delete from bookmall.order";
 			pstmt = connection.prepareStatement(sql);
 			
 			pstmt.executeUpdate();

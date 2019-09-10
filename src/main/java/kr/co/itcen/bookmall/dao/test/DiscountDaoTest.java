@@ -10,7 +10,6 @@ public class DiscountDaoTest {
 		insertTest();
 		readTest();
 		updateTest();
-		deleteAllTest();
 	}
 	
 	private static void insertTest() {

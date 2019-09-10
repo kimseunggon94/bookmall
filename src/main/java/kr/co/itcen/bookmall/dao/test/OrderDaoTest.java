@@ -10,15 +10,13 @@ public class OrderDaoTest {
 		insertTest();
 		readTest();
 		updateTest();
-		deleteAllTest();
 	}
 	
 	private static void insertTest() {
 		OrderDao dao = new OrderDao();
 		
 		OrderVo vo1 = new OrderVo();
-		vo1.setPrice((long) 13000);
-		vo1.setDeli_no((long)1);
+		vo1.settotal_Price(0);
 		vo1.setDeli_address("안산시");
 		vo1.setUser_no((long)2);
 		dao.insert(vo1);
@@ -35,7 +33,7 @@ public class OrderDaoTest {
 	
 	private static void updateTest() {
 		OrderDao dao = new OrderDao();
-		dao.update((long) 1, "Test성공");
+		dao.update((long) 1, "부산시");
 	}
 
 	private static void deleteAllTest() {

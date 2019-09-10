@@ -39,7 +39,7 @@ public class BookDao {
 			String sql = "insert into book values(null, ?, ?, ?, null)";
 			pstmt = connection.prepareStatement(sql);
 			pstmt.setString(1, vo1.getTitle());
-			pstmt.setLong(2, vo1.getPrice());
+			pstmt.setInt(2, vo1.getPrice());
 			pstmt.setLong(3, vo1.getCategory_no());
 			
 			
@@ -84,7 +84,7 @@ public class BookDao {
 			while(rs.next()){
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
-				Long price = rs.getLong(3);
+				int price = rs.getInt(3);
 				Long category_no = rs.getLong(4);
 				
 				BookVo vo= new BookVo();
