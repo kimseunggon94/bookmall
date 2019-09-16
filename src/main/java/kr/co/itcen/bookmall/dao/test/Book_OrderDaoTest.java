@@ -16,7 +16,7 @@ public class Book_OrderDaoTest {
 		Book_OrderDao dao = new Book_OrderDao();
 		
 		Book_OrderVo vo1 = new Book_OrderVo();
-		vo1.setAmount(10);
+		vo1.setAmount(15);
 		vo1.setBook_no((long)3);
 		vo1.setOrder_no((long)1);
 		

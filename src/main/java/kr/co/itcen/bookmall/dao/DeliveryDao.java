@@ -12,7 +12,6 @@ import kr.co.itcen.bookmall.vo.DeliveryVo;
 
 public class DeliveryDao {
 
-
 	private Connection getConnection() throws SQLException {
 		Connection connection = null;
 		
