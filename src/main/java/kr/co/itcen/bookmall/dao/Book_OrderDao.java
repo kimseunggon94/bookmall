@@ -48,8 +48,9 @@ public class Book_OrderDao {
 			int count = pstmt.executeUpdate();
 			result = (count == 1);
 			
-			String sql1 = "select price from book where no = "+vo1.getBook_no();
+			String sql1 = "select price from book where no = ?";
 			pstmt = connection.prepareStatement(sql1);
+			pstmt.setLong(1, vo1.getBook_no());
 			rs = pstmt.executeQuery();
 			
 			int total_price =0;
@@ -59,8 +60,9 @@ public class Book_OrderDao {
 				total_price = price * vo1.getAmount();
 			}
 			
-			String sql2 = "select total_price from bookmall.order where no="+vo1.getOrder_no();
+			String sql2 = "select total_price from bookmall.order where no=?";
 			pstmt = connection.prepareStatement(sql2);
+			pstmt.setLong(1, vo1.getOrder_no());
 			rs = pstmt.executeQuery(); 
 			
 			while(rs.next()){
@@ -153,6 +155,7 @@ public class Book_OrderDao {
 		boolean result = false;
 		Connection connection = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
 		try {
 			connection = getConnection();
@@ -166,6 +169,7 @@ public class Book_OrderDao {
 			int count = pstmt.executeUpdate();
 			
 			result = (count==1);
+			
 			
 			
 		} catch (SQLException e) {
