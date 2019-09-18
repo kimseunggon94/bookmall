@@ -86,14 +86,14 @@ public class CartDao {
 				String user_name = rs.getString(1);
 				String book_name = rs.getString(2);
 				int amount = rs.getInt(3);
-				int price = rs.getInt(4);
+				int total_price = rs.getInt(4);
 				
 				ArrayList temp= new ArrayList();
 				
-				temp.add(user_name);
-				temp.add(book_name);
-				temp.add(amount);
-				temp.add(price);
+				temp.add("사용자 이름 : "+user_name);
+				temp.add("책 이름 : "+book_name);
+				temp.add("수량 : " + amount);
+				temp.add("총가격 : " + total_price);
 				
 				result.add(temp);
 			}

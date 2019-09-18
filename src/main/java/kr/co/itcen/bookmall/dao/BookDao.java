@@ -86,9 +86,9 @@ public class BookDao {
 				
 				
 				ArrayList temp = new ArrayList();
-				temp.add(title);
-				temp.add(name);
-				temp.add(price);
+				temp.add("책이름 : "+title);
+				temp.add("카테고리 이름 : "+name);
+				temp.add("가격 : "+price);
 				
 				result.add(temp);
 			}

@@ -8,8 +8,9 @@ import kr.co.itcen.bookmall.vo.Book_OrderVo;
 
 public class Book_OrderDaoTest {
 	public static void main(String[] args) {
-		insertTest();
+		
 		readTest();
+		deleteTest();
 	}
 	
 	private static void insertTest() {
@@ -34,10 +35,10 @@ public class Book_OrderDaoTest {
 	
 	private static void updateTest() {
 		Book_OrderDao dao = new Book_OrderDao();
-		dao.update((long) 1, 30);
+		dao.update((long) 5,0);
 	}
 
-	private static void deleteAllTest() {
-		new Book_OrderDao().delete();	
+	private static void deleteTest() {
+		new Book_OrderDao().delete(8L);	
 	}
 }

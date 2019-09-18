@@ -81,7 +81,7 @@ public class CategoryDao {
 			
 			while(rs.next()){
 				String name = rs.getString(1);
-				result.add(name);
+				result.add("카테고리 이름 : "+name);
 			}
 			
 		} catch (SQLException e) {

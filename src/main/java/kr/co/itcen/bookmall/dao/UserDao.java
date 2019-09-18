@@ -90,11 +90,11 @@ public class UserDao {
 				String address =  rs.getString(5);
 				
 				ArrayList temp = new ArrayList();
-				temp.add(name);
-				temp.add(phone);
-				temp.add(email);
-				temp.add(password);
-				temp.add(address);			
+				temp.add("사용자 이름 : "+name);
+				temp.add("사용자 휴대폰번호 : "+phone);
+				temp.add("사용자 이메일 : "+email);
+				temp.add("사용자 비밀번호 : "+password);
+				temp.add("사용자 주소 : "+address);			
 				result.add(temp);
 			}
 		} catch (SQLException e) {

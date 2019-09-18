@@ -91,11 +91,11 @@ public class OrderDao {
 				
 				ArrayList temp = new ArrayList();
 				
-				temp.add(no);
-				temp.add(name);
-				temp.add(email);
-				temp.add(price);
-				temp.add(deli_address);
+				temp.add("주문번호 : "+no);
+				temp.add("사용자 이름 : "+name);
+				temp.add("사용자 이메일 : "+email);
+				temp.add("총가격 : "+ price);
+				temp.add("배송지주소 : " +deli_address);
 				
 				result.add(temp);
 			}

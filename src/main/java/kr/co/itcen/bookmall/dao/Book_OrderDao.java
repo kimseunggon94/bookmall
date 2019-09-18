@@ -108,7 +108,7 @@ public class Book_OrderDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "select book.no, book.title, book_order.amount, bookmall.order.total_price "
+			String sql = "select book.no, book.title, book.price, book_order.amount, bookmall.order.total_price "
 					+ "from bookmall.order, book_order, book where book_order.book_no =book.no "
 					+ "and book_order.order_no=bookmall.order.no order by book_order.no asc";
 			pstmt = connection.prepareStatement(sql);
@@ -118,15 +118,17 @@ public class Book_OrderDao {
 			while(rs.next()){
 				Long no = rs.getLong(1);
 				String title =rs.getString(2);
-				int amount = rs.getInt(3);
-				int price = rs.getInt(4);
+				String price = rs.getString(3);
+				int amount = rs.getInt(4);
+				int total_price = rs.getInt(5);
 				
 				ArrayList temp = new ArrayList();
 				
-				temp.add(no);
-				temp.add(title);
-				temp.add(amount);
-				temp.add(price);
+				temp.add("책 번호 : "+no);
+				temp.add("책 제목 : "+title);
+				temp.add("책 가격 : "+price);
+				temp.add("수량 : " + amount);
+				temp.add("총가격 : "+total_price);
 				
 				result.add(temp);			
 			}
@@ -156,9 +158,21 @@ public class Book_OrderDao {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+		Long book_no=(long)0;
+		Long order_no=(long)0;
+		int pree_amount=0;
 		try {
 			connection = getConnection();
+			
+			String sql1 = "select book_no, order_no,amount from book_order where no=?";
+			pstmt = connection.prepareStatement(sql1);
+			pstmt.setLong(1, no);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				book_no = rs.getLong(1);
+				order_no = rs.getLong(2);
+				pree_amount = rs.getInt(3);
+			}
 			
 			String sql = "update book_order set amount = ? where no = ?";
 			pstmt = connection.prepareStatement(sql);
@@ -167,9 +181,39 @@ public class Book_OrderDao {
 			pstmt.setLong(2, no);
 			
 			int count = pstmt.executeUpdate();
-			
 			result = (count==1);
+						
+			String sql2 = "select price from book where no = ?";
+			pstmt = connection.prepareStatement(sql2);
+			pstmt.setLong(1, book_no);
+			rs = pstmt.executeQuery();
 			
+			int total_price =0;
+			
+			while(rs.next()){
+				int price = rs.getInt(1);
+				System.out.println(price);
+				total_price = price * (amount-pree_amount);
+			}
+			
+			String sql3 = "select total_price from bookmall.order where no=?";
+			pstmt = connection.prepareStatement(sql3);
+			pstmt.setLong(1, order_no);
+			rs = pstmt.executeQuery(); 
+			
+			while(rs.next()){
+				int price = rs.getInt(1);
+				total_price += price;
+			}
+			
+			String sql4 = "update bookmall.order set total_price = ? where no = ?";
+			
+			pstmt = connection.prepareStatement(sql4);
+			;
+			pstmt.setInt(1, total_price);									
+			pstmt.setLong(2, order_no);
+			
+			pstmt.executeUpdate();
 			
 			
 		} catch (SQLException e) {
@@ -189,17 +233,63 @@ public class Book_OrderDao {
 		return result;
 	}
 	
-	public void delete() {
+	public void delete(Long no) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
-		
+		ResultSet rs = null;
+		Long book_no=(long)0;
+		Long order_no=(long)0;
+		int pree_amount=0;
 		try {
 			connection = getConnection();
 			
-			String sql = "delete from book_order";
+			String sql1 = "select book_no, order_no,amount from book_order where no=?";
+			pstmt = connection.prepareStatement(sql1);
+			pstmt.setLong(1, no);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				book_no = rs.getLong(1);
+				order_no = rs.getLong(2);
+				pree_amount = rs.getInt(3);
+			}
+			
+			String sql = "delete from book_order where no=?";
 			pstmt = connection.prepareStatement(sql);
+			pstmt.setLong(1, no);
+			pstmt.executeUpdate();
+			
+			String sql2 = "select price from book where no = ?";
+			pstmt = connection.prepareStatement(sql2);
+			pstmt.setLong(1, book_no);
+			rs = pstmt.executeQuery();
+			
+			int total_price =0;
+			
+			while(rs.next()){
+				int price = rs.getInt(1);
+				System.out.println(price);
+				total_price = -price * pree_amount;
+			}
+			
+			String sql3 = "select total_price from bookmall.order where no=?";
+			pstmt = connection.prepareStatement(sql3);
+			pstmt.setLong(1, order_no);
+			rs = pstmt.executeQuery(); 
+			
+			while(rs.next()){
+				int price = rs.getInt(1);
+				total_price += price;
+			}
+			
+			String sql4 = "update bookmall.order set total_price = ? where no = ?";
+			
+			pstmt = connection.prepareStatement(sql4);
+			;
+			pstmt.setInt(1, total_price);									
+			pstmt.setLong(2, order_no);
 			
 			pstmt.executeUpdate();
+			
 			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
